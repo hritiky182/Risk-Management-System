@@ -97,10 +97,10 @@ export function LoginPage() {
         <form onSubmit={handleSubmit} className="login-form">
           <div className="form-group" style={{ marginBottom: 16 }}>
             <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-              <Mail size={13} color="var(--color-primary)" />
+              <Mail size={13} color="var(--brand-primary)" />
               <span>Corporate Email or Employee ID</span>
             </label>
-            <div className="login-input-wrapper">
+            <div className="login-input-wrapper" style={{ position: 'relative', width: '100%' }}>
               <input
                 type="email"
                 className="form-input"
@@ -108,7 +108,7 @@ export function LoginPage() {
                 onChange={e => setEmail(e.target.value)}
                 placeholder="name@apexinsurance.com"
                 required
-                style={{ height: 44, fontSize: 13.5 }}
+                style={{ width: '100%', height: 44, fontSize: 13.5, boxSizing: 'border-box' }}
               />
             </div>
           </div>
@@ -116,7 +116,7 @@ export function LoginPage() {
           <div className="form-group" style={{ marginBottom: 16 }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 6 }}>
               <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: 6, margin: 0 }}>
-                <Lock size={13} color="var(--color-primary)" />
+                <Lock size={13} color="var(--brand-primary)" />
                 <span>Password</span>
               </label>
               <button
@@ -127,7 +127,7 @@ export function LoginPage() {
                 Forgot password?
               </button>
             </div>
-            <div className="login-input-wrapper" style={{ position: 'relative' }}>
+            <div className="login-input-wrapper" style={{ position: 'relative', width: '100%' }}>
               <input
                 type={showPassword ? 'text' : 'password'}
                 className="form-input"
@@ -135,7 +135,7 @@ export function LoginPage() {
                 onChange={e => setPassword(e.target.value)}
                 placeholder="••••••••••••"
                 required
-                style={{ height: 44, fontSize: 13.5, paddingRight: 42 }}
+                style={{ width: '100%', height: 44, fontSize: 13.5, paddingRight: 44, boxSizing: 'border-box' }}
               />
               <button
                 type="button"
@@ -161,7 +161,7 @@ export function LoginPage() {
 
           <button
             type="submit"
-            className="btn btn-primary login-submit-btn"
+            className="login-submit-btn"
             disabled={isLoading}
           >
             {isLoading ? (

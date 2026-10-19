@@ -21,6 +21,10 @@
   --brand-primary-hover: #005bb5;
   --brand-primary-dark: #004b96;
   --brand-primary-light: #e0f2fe;
+  --color-primary: #006ec7;
+  --color-primary-hover: #005bb5;
+  --color-primary-dark: #004b96;
+  --color-primary-light: #e0f2fe;
   --brand-secondary: #0284c7;
   --brand-accent: #0284c7;
   --brand-gradient: linear-gradient(135deg, #006ec7 0%, #0284c7 100%);
@@ -971,6 +975,8 @@ button {
 }
 
 .form-input, .form-select, .form-textarea {
+  width: 100%;
+  box-sizing: border-box;
   background: #ffffff;
   border: 1px solid var(--border-medium);
   border-radius: var(--radius-md);
@@ -1326,10 +1332,11 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 5;
 }
 
 .password-toggle-btn:hover {
-  color: var(--text-primary);
+  color: var(--brand-primary);
 }
 
 .remember-me-label {
@@ -1342,30 +1349,39 @@ button {
 }
 
 .remember-me-label input[type="checkbox"] {
-  accent-color: var(--color-primary);
+  accent-color: var(--brand-primary);
   width: 15px;
   height: 15px;
+  cursor: pointer;
 }
 
 .login-submit-btn {
   width: 100%;
-  height: 44px;
-  font-size: 13.5px;
+  height: 46px;
+  font-size: 14px;
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   border-radius: 9px;
-  background: var(--color-primary);
-  box-shadow: 0 4px 14px rgba(0, 110, 199, 0.3);
+  background: #006ec7 !important;
+  color: #ffffff !important;
+  border: 1px solid #005bb5 !important;
+  box-shadow: 0 4px 14px rgba(0, 110, 199, 0.35);
+  cursor: pointer;
   transition: all 0.18s ease;
 }
 
 .login-submit-btn:hover:not(:disabled) {
-  background: var(--color-primary-dark);
+  background: #005bb5 !important;
   transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(0, 110, 199, 0.4);
+  box-shadow: 0 6px 18px rgba(0, 110, 199, 0.45);
+}
+
+.login-submit-btn:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
 }
 
 /* One-Click Demo Personas Section */
