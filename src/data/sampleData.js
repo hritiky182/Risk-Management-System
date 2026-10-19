@@ -70,7 +70,7 @@ export const INITIAL_USERS = [
   {
     id: 'usr-1',
     name: 'Mutale Mwamba',
-    email: 'm.mwamba@apexinsurance.com',
+    email: 'm.mwamba@test.com',
     role: 'Risk Manager',
     department: 'Enterprise Risk & Governance',
     branchId: 'BR-LUS',
@@ -82,7 +82,7 @@ export const INITIAL_USERS = [
   {
     id: 'usr-2',
     name: 'Chileshe Banda',
-    email: 'c.banda@apexinsurance.com',
+    email: 'c.banda@test.com',
     role: 'System Administrator',
     department: 'Information Technology',
     branchId: 'BR-LUS',
@@ -94,7 +94,7 @@ export const INITIAL_USERS = [
   {
     id: 'usr-3',
     name: 'Kabaso Tembo',
-    email: 'k.tembo@apexinsurance.com',
+    email: 'k.tembo@test.com',
     role: 'Compliance Officer',
     department: 'Legal & Regulatory Affairs',
     branchId: 'BR-LUS',
@@ -106,7 +106,7 @@ export const INITIAL_USERS = [
   {
     id: 'usr-4',
     name: 'Grace Lungu',
-    email: 'g.lungu@apexinsurance.com',
+    email: 'g.lungu@test.com',
     role: 'Branch Manager',
     department: 'Ndola Branch Operations',
     branchId: 'BR-NDO',
@@ -118,7 +118,7 @@ export const INITIAL_USERS = [
   {
     id: 'usr-5',
     name: 'Kondwani Zulu',
-    email: 'k.zulu@apexinsurance.com',
+    email: 'k.zulu@test.com',
     role: 'Department/User',
     department: 'Claims & Technical Underwriting',
     branchId: 'BR-LUS',
@@ -130,7 +130,7 @@ export const INITIAL_USERS = [
   {
     id: 'usr-6',
     name: 'Brian Chilufya',
-    email: 'b.chilufya@apexinsurance.com',
+    email: 'b.chilufya@test.com',
     role: 'Auditor',
     department: 'Internal Audit & Assurance',
     branchId: 'BR-LUS',

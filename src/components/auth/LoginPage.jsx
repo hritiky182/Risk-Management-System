@@ -16,7 +16,7 @@ import {
 export function LoginPage() {
   const { users, login } = useERM();
 
-  const [email, setEmail] = useState('m.mwamba@apexinsurance.com');
+  const [email, setEmail] = useState('m.mwamba@test.com');
   const [password, setPassword] = useState('••••••••••••');
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(true);
@@ -106,7 +106,7 @@ export function LoginPage() {
                 className="form-input"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
-                placeholder="name@apexinsurance.com"
+                placeholder="name@test.com"
                 required
                 style={{ width: '100%', height: 44, fontSize: 13.5, boxSizing: 'border-box' }}
               />
@@ -231,7 +231,7 @@ export function LoginPage() {
               </p>
               <div style={{ margin: '14px 0', background: 'var(--bg-subtle)', padding: 12, borderRadius: 8, border: '1px solid var(--border-subtle)' }}>
                 <div><strong>IT Service Desk:</strong> ext. 4410</div>
-                <div><strong>Security Operations:</strong> sec-ops@apexinsurance.com</div>
+                <div><strong>Security Operations:</strong> sec-ops@test.com</div>
                 <div style={{ marginTop: 6, fontSize: 11, color: 'var(--color-primary)', fontWeight: 600 }}>
                   For demonstration, please click any of the One-Click Demo Personas on the login card to immediately enter the system.
                 </div>
