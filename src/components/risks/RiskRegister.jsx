@@ -10,7 +10,9 @@ import {
   AlertTriangle,
   Eye,
   SlidersHorizontal,
-  Building2
+  Building2,
+  X,
+  RotateCcw
 } from 'lucide-react';
 import { formatZMW, formatDate, exportToCSV } from '../../utils/formatters';
 
@@ -53,6 +55,22 @@ export function RiskRegister() {
     if (sortBy === 'financialExposureZMW') return (b.financialExposureZMW || 0) - (a.financialExposureZMW || 0);
     return a.code.localeCompare(b.code);
   });
+
+  const hasActiveFilters = Boolean(
+    searchQuery.trim() ||
+    selectedCategory !== 'ALL' ||
+    selectedSeverity !== 'ALL' ||
+    selectedStatus !== 'ALL' ||
+    sortBy !== 'residualScore'
+  );
+
+  const handleResetFilters = () => {
+    setSearchQuery('');
+    setSelectedCategory('ALL');
+    setSelectedSeverity('ALL');
+    setSelectedStatus('ALL');
+    setSortBy('residualScore');
+  };
 
   const handleExportCSV = () => {
     const rows = displayedRisks.map(r => ({
@@ -100,28 +118,38 @@ export function RiskRegister() {
         </div>
       </div>
 
-      {/* Filter and Search Bar */}
-      <div className="filter-bar">
-        {/* Search */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8, flex: 1, minWidth: 240 }}>
-          <Search size={16} color="var(--brand-primary)" />
+      {/* Full Length Search & Horizontal Filters Card */}
+      <div className="risk-filter-card">
+        {/* Full-width Search Bar */}
+        <div className="risk-search-bar">
+          <Search size={16} className="risk-search-icon" />
           <input
             type="text"
-            className="form-input"
+            className="risk-search-input"
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
             placeholder="Search risk by title, code, owner, description..."
-            style={{ width: '100%' }}
           />
+          {searchQuery && (
+            <button
+              type="button"
+              className="risk-search-clear-btn"
+              onClick={() => setSearchQuery('')}
+              title="Clear search query"
+            >
+              <X size={15} />
+            </button>
+          )}
         </div>
 
-        {/* Filters */}
-        <div className="filter-group">
+        {/* Horizontal Filter Dropdowns Row */}
+        <div className="risk-filters-row">
           {/* Category */}
           <select
-            className="form-select"
+            className={`risk-filter-select ${selectedCategory !== 'ALL' ? 'is-active' : ''}`}
             value={selectedCategory}
             onChange={e => setSelectedCategory(e.target.value)}
+            aria-label="Filter by Category"
           >
             <option value="ALL">All Categories</option>
             <option value="Operational">Operational</option>
@@ -134,9 +162,10 @@ export function RiskRegister() {
 
           {/* Severity */}
           <select
-            className="form-select"
+            className={`risk-filter-select ${selectedSeverity !== 'ALL' ? 'is-active' : ''}`}
             value={selectedSeverity}
             onChange={e => setSelectedSeverity(e.target.value)}
+            aria-label="Filter by Severity"
           >
             <option value="ALL">All Severities</option>
             <option value="Critical">Critical (≥ 16)</option>
@@ -147,9 +176,10 @@ export function RiskRegister() {
 
           {/* Status */}
           <select
-            className="form-select"
+            className={`risk-filter-select ${selectedStatus !== 'ALL' ? 'is-active' : ''}`}
             value={selectedStatus}
             onChange={e => setSelectedStatus(e.target.value)}
+            aria-label="Filter by Status"
           >
             <option value="ALL">All Statuses</option>
             <option value="Approved">Approved</option>
@@ -159,9 +189,10 @@ export function RiskRegister() {
 
           {/* Sort By */}
           <select
-            className="form-select"
+            className={`risk-filter-select ${sortBy !== 'residualScore' ? 'is-active' : ''}`}
             value={sortBy}
             onChange={e => setSortBy(e.target.value)}
+            aria-label="Sort Risk Register"
           >
             <option value="residualScore">Sort by Residual Score</option>
             <option value="inherentScore">Sort by Inherent Score</option>
@@ -169,6 +200,78 @@ export function RiskRegister() {
             <option value="code">Sort by Risk Code</option>
           </select>
         </div>
+
+        {/* Active Filters Pill Bar (shown only when filters or search are active) */}
+        {hasActiveFilters && (
+          <div className="risk-active-filters-bar">
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
+              <span style={{ fontSize: 12, color: 'var(--text-muted)', fontWeight: 500 }}>
+                Active filters ({displayedRisks.length} result{displayedRisks.length === 1 ? '' : 's'}):
+              </span>
+              {searchQuery && (
+                <span className="risk-filter-tag">
+                  Query: "{searchQuery}"
+                  <button type="button" onClick={() => setSearchQuery('')} title="Remove search filter">
+                    <X size={11} />
+                  </button>
+                </span>
+              )}
+              {selectedCategory !== 'ALL' && (
+                <span className="risk-filter-tag">
+                  Category: {selectedCategory}
+                  <button type="button" onClick={() => setSelectedCategory('ALL')} title="Remove category filter">
+                    <X size={11} />
+                  </button>
+                </span>
+              )}
+              {selectedSeverity !== 'ALL' && (
+                <span className="risk-filter-tag">
+                  Severity: {selectedSeverity}
+                  <button type="button" onClick={() => setSelectedSeverity('ALL')} title="Remove severity filter">
+                    <X size={11} />
+                  </button>
+                </span>
+              )}
+              {selectedStatus !== 'ALL' && (
+                <span className="risk-filter-tag">
+                  Status: {selectedStatus}
+                  <button type="button" onClick={() => setSelectedStatus('ALL')} title="Remove status filter">
+                    <X size={11} />
+                  </button>
+                </span>
+              )}
+              {sortBy !== 'residualScore' && (
+                <span className="risk-filter-tag">
+                  Sorted by: {sortBy === 'inherentScore' ? 'Inherent Score' : sortBy === 'financialExposureZMW' ? 'Financial Exposure' : 'Risk Code'}
+                  <button type="button" onClick={() => setSortBy('residualScore')} title="Reset sort">
+                    <X size={11} />
+                  </button>
+                </span>
+              )}
+            </div>
+
+            <button
+              type="button"
+              onClick={handleResetFilters}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 5,
+                fontSize: 12,
+                fontWeight: 600,
+                color: 'var(--brand-primary)',
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                padding: '3px 8px',
+                borderRadius: 'var(--radius-sm)'
+              }}
+            >
+              <RotateCcw size={12} />
+              <span>Reset all</span>
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Risk Table */}
