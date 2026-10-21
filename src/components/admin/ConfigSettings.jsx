@@ -25,7 +25,7 @@ export function ConfigSettings() {
 
         <button className="btn btn-secondary" onClick={resetDemoData} style={{ color: '#dc2626' }}>
           <RotateCcw size={15} />
-          <span>Restore Sample Data (Demo Reset)</span>
+          <span>Reset to Default Configuration</span>
         </button>
       </div>
 

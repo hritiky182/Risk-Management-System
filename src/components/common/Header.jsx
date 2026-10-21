@@ -3,7 +3,6 @@ import { useERM } from '../../context/ERMContext';
 import {
   Search,
   Bell,
-  RotateCcw,
   Building2,
   UserCheck,
   CheckCircle,
@@ -25,7 +24,6 @@ export function Header() {
     notifications,
     setNotifications,
     setGlobalSearchOpen,
-    resetDemoData,
     showToast,
     runAIUniverseScan,
     logout
@@ -176,17 +174,6 @@ export function Header() {
             </div>
           )}
         </div>
-
-        {/* Reset Demo Data Button */}
-        <button
-          className="btn btn-secondary btn-sm"
-          onClick={resetDemoData}
-          title="Restore pristine sample database for technical evaluation"
-          style={{ borderColor: '#fecaca', color: '#b91c1c', background: '#fff5f5' }}
-        >
-          <RotateCcw size={13} />
-          <span>Reset Demo</span>
-        </button>
 
         {/* Current User Profile Capsule */}
         <div
